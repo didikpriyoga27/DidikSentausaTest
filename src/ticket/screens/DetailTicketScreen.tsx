@@ -1,3 +1,5 @@
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {formatDate} from 'date-fns';
 import React, {useCallback, useMemo} from 'react';
 import {
   Image,
@@ -7,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import {twMerge} from 'tailwind-merge';
+import {StackParamList} from '../../AppContainer';
 import BaseLayoutComponent from '../../shared/components/BaseLayoutComponent';
 import Button from '../../shared/components/Button';
 import Header from '../../shared/components/Header';
@@ -18,6 +21,8 @@ const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
 const today = new Date();
 
 const DetailTicketScreen = () => {
+  const {navigate} = useNavigation<NavigationProp<StackParamList>>();
+
   const [selectedDateIndex, setSelectedDateIndex] = React.useState<
     number | null
   >(null);
@@ -43,7 +48,7 @@ const DetailTicketScreen = () => {
     return {
       day: days[date.getDay()],
       date: date.getDate(),
-      fullDate: date,
+      fullDate: formatDate(date, 'yyyy-MM-dd'),
     };
   }, []);
 
@@ -65,8 +70,13 @@ const DetailTicketScreen = () => {
   }, [selectedMovieId, selectedScheduleId]);
 
   const handleContinue = useCallback(() => {
-    console.log(selectedDateIndex, selectedMovieId, selectedScheduleId, price);
-  }, [selectedDateIndex, selectedMovieId, selectedScheduleId, price]);
+    const payload = {
+      fullDate: dates[selectedDateIndex!].fullDate,
+      selectedMovieId,
+      selectedScheduleId,
+    };
+    navigate('Payment', {payload});
+  }, [dates, navigate, selectedDateIndex, selectedMovieId, selectedScheduleId]);
 
   return (
     <BaseLayoutComponent>

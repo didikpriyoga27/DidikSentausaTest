@@ -1,17 +1,27 @@
 import React from 'react';
-import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
+import {
+  ActivityIndicator,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native';
 import {twMerge} from 'tailwind-merge';
+import colors from '../utils/colors';
 import Text from './Text';
 
 interface IButtonProps extends TouchableOpacityProps {
   text: string;
+  isLoading?: boolean;
 }
 
-const Button = ({text, ...props}: IButtonProps) => {
+const Button = ({text, isLoading, ...props}: IButtonProps) => {
   return (
     <TouchableOpacity
       {...props}
-      className={twMerge('bg-accent w-full p-4 rounded-md', props.className)}>
+      className={twMerge(
+        'bg-accent w-full p-4 rounded-md flex-row items-center justify-center gap-2',
+        props.className,
+      )}>
+      {isLoading && <ActivityIndicator color={colors.primary} />}
       <Text className="text-primary font-semibold text-center text-xl">
         {text}
       </Text>

@@ -11,10 +11,20 @@ import TabBarComponent from './shared/components/TabBarComponent';
 import colors from './shared/utils/colors';
 import DetailTicketScreen from './ticket/screens/DetailTicketScreen';
 import MyTicketScreen from './ticket/screens/MyTicketScreen';
+import PaymentScreen from './ticket/screens/PaymentScreen';
+
+interface PaymentPayload {
+  fullDate: string;
+  selectedMovieId: number | null;
+  selectedScheduleId: number | null;
+}
 
 export type StackParamList = {
   MyTicket: undefined;
   DetailTicket: undefined;
+  Payment: {
+    payload: PaymentPayload;
+  };
 };
 
 const Tab = createBottomTabNavigator();
@@ -25,6 +35,7 @@ const TicketStack = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="MyTicket" component={MyTicketScreen} />
       <Stack.Screen name="DetailTicket" component={DetailTicketScreen} />
+      <Stack.Screen name="Payment" component={PaymentScreen} />
     </Stack.Navigator>
   );
 };
