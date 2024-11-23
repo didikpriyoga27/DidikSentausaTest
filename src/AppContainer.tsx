@@ -8,8 +8,10 @@ import AccountIcon from './shared/assets/icons/AccountIcon';
 import HomeIcon from './shared/assets/icons/HomeIcon';
 import TicketIcon from './shared/assets/icons/TicketIcon';
 import TabBarComponent from './shared/components/TabBarComponent';
+import {Ticket} from './shared/store/ticketStore';
 import colors from './shared/utils/colors';
 import BuyTicketScreen from './ticket/screens/BuyTicketScreen';
+import DetailTicketScreen from './ticket/screens/DetailTicketScreen';
 import MyTicketScreen from './ticket/screens/MyTicketScreen';
 import PaymentScreen from './ticket/screens/PaymentScreen';
 import PaymentSuccessScreen from './ticket/screens/PaymentSuccessScreen';
@@ -29,6 +31,9 @@ export type StackParamList = {
   PaymentSuccess: {
     payload: PaymentPayload;
   };
+  DetailTicket: {
+    ticket: Ticket;
+  };
 };
 
 const Tab = createBottomTabNavigator();
@@ -41,6 +46,7 @@ const TicketStack = () => {
       <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
       <Stack.Screen name="Payment" component={PaymentScreen} />
       <Stack.Screen name="PaymentSuccess" component={PaymentSuccessScreen} />
+      <Stack.Screen name="DetailTicket" component={DetailTicketScreen} />
     </Stack.Navigator>
   );
 };
