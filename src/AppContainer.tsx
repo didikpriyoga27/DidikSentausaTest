@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useCallback} from 'react';
 import AccountScreen from './account/screens/AccountScreen';
@@ -8,11 +8,17 @@ import AccountIcon from './shared/assets/icons/AccountIcon';
 import HomeIcon from './shared/assets/icons/HomeIcon';
 import TicketIcon from './shared/assets/icons/TicketIcon';
 import TabBarComponent from './shared/components/TabBarComponent';
+import colors from './shared/utils/colors';
 import DetailTicketScreen from './ticket/screens/DetailTicketScreen';
 import MyTicketScreen from './ticket/screens/MyTicketScreen';
 
+export type StackParamList = {
+  MyTicket: undefined;
+  DetailTicket: undefined;
+};
+
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackParamList>();
 
 const TicketStack = () => {
   return (
@@ -40,8 +46,16 @@ const AppContainer = () => {
     return <AccountIcon width={size} height={size} color={color} />;
   }, []);
 
+  const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: colors.primary,
+    },
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
       <Tab.Navigator
         tabBar={TabBarComponent}
         screenOptions={{headerShown: false}}>
