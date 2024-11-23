@@ -1,15 +1,29 @@
 import React, {useCallback, useMemo} from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {twMerge} from 'tailwind-merge';
 import BaseLayoutComponent from '../../shared/components/BaseLayoutComponent';
 import Header from '../../shared/components/Header';
 import Text from '../../shared/components/Text';
+import movies from '../../shared/datas/movies';
 
 const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
 const today = new Date();
 
 const DetailTicketScreen = () => {
   const [selectedDateIndex, setSelectedDateIndex] = React.useState(0);
+  const [selectedMovieId, setSelectedMovieId] = React.useState<number | null>(
+    null,
+  );
+
+  const resetBySelectDate = useCallback(() => {
+    setSelectedMovieId(null);
+  }, []);
 
   const getDateInfo = useCallback((offset: number) => {
     const date = new Date(today);
@@ -39,7 +53,10 @@ const DetailTicketScreen = () => {
           return (
             <TouchableOpacity
               key={date}
-              onPress={() => setSelectedDateIndex(index)}
+              onPress={() => {
+                setSelectedDateIndex(index);
+                resetBySelectDate();
+              }}
               className={twMerge(
                 'items-center w-20 h-20 justify-center bg-secondary rounded-full',
                 isActive && 'bg-accent',
@@ -58,8 +75,37 @@ const DetailTicketScreen = () => {
           );
         })}
       </View>
-      <View className="p-4 gap-2">
-        <Text className="font-semibold text-xl">Pilih film</Text>
+      <View className="gap-2">
+        <Text className="font-semibold text-xl p-4">Pilih film</Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerClassName="px-4 gap-4">
+          {movies.map(movie => {
+            const isSelected = movie.id === selectedMovieId;
+            return (
+              <Pressable
+                onPress={() => setSelectedMovieId(movie.id)}
+                key={movie.id}
+                className="max-w-40">
+                <Image
+                  source={{
+                    uri: 'https://image.tmdb.org/t/p/w200' + movie.poster_path,
+                  }}
+                  className={`w-40 h-60 rounded-md ${
+                    isSelected && 'border-2 border-accent'
+                  }`}
+                />
+                <Text
+                  className={`font-semibold text-xl ${
+                    isSelected && 'text-accent'
+                  }`}>
+                  {movie.title}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </ScrollView>
       </View>
     </BaseLayoutComponent>
   );
