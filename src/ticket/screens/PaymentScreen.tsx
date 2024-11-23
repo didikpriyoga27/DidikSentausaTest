@@ -1,4 +1,9 @@
-import {RouteProp, useRoute} from '@react-navigation/native';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {formatDate} from 'date-fns';
 import {id} from 'date-fns/locale';
 import React, {useCallback, useMemo, useState} from 'react';
@@ -16,6 +21,7 @@ import schedules from '../../shared/datas/schedules';
 const PaymentScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
+  const {navigate} = useNavigation<NavigationProp<StackParamList>>();
   const {params} = useRoute<RouteProp<StackParamList, 'Payment'>>();
 
   const schedule = useMemo(() => {
@@ -33,8 +39,9 @@ const PaymentScreen = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
+      navigate('PaymentSuccess', {payload: params.payload});
     }, 2000);
-  }, []);
+  }, [navigate, params.payload]);
 
   return (
     <BaseLayoutComponent>

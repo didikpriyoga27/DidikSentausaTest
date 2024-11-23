@@ -12,6 +12,7 @@ import colors from './shared/utils/colors';
 import DetailTicketScreen from './ticket/screens/DetailTicketScreen';
 import MyTicketScreen from './ticket/screens/MyTicketScreen';
 import PaymentScreen from './ticket/screens/PaymentScreen';
+import PaymentSuccessScreen from './ticket/screens/PaymentSuccessScreen';
 
 interface PaymentPayload {
   fullDate: string;
@@ -25,6 +26,9 @@ export type StackParamList = {
   Payment: {
     payload: PaymentPayload;
   };
+  PaymentSuccess: {
+    payload: PaymentPayload;
+  };
 };
 
 const Tab = createBottomTabNavigator();
@@ -36,6 +40,7 @@ const TicketStack = () => {
       <Stack.Screen name="MyTicket" component={MyTicketScreen} />
       <Stack.Screen name="DetailTicket" component={DetailTicketScreen} />
       <Stack.Screen name="Payment" component={PaymentScreen} />
+      <Stack.Screen name="PaymentSuccess" component={PaymentSuccessScreen} />
     </Stack.Navigator>
   );
 };
