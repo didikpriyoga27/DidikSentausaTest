@@ -16,9 +16,9 @@ const AccountScreen = () => {
     <BaseLayoutComponent>
       <Header title="Akun Saya" />
       <View className="p-4 gap-4">
-        <Text className="text-2xl font-semibold">Nama: {account.name}</Text>
-        <Text className="text-2xl">Email: {account.email}</Text>
-        <Text className="text-2xl">Kartu Membership:</Text>
+        <Text className="text-xl font-semibold">Nama: {account.name}</Text>
+        <Text className="text-xl">Email: {account.email}</Text>
+        <Text className="text-xl">Kartu Membership:</Text>
         <View>
           <Image
             source={require('../../shared/assets/images/card_background.jpg')}
