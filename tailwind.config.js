@@ -10,6 +10,11 @@ module.exports = {
         tertiary: '#3C6562',
         accent: '#F4DE34',
       },
+      fontFamily: {
+        regular: 'Raleway-Regular',
+        bold: 'Raleway-Bold',
+        semibold: 'Raleway-SemiBold',
+      },
     },
   },
   plugins: [],
