@@ -17,12 +17,14 @@ import Header from '../../shared/components/Header';
 import Text from '../../shared/components/Text';
 import movies from '../../shared/datas/movies';
 import schedules from '../../shared/datas/schedules';
+import useTicketStore from '../../shared/store/ticketStore';
 
 const PaymentScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const {navigate} = useNavigation<NavigationProp<StackParamList>>();
   const {params} = useRoute<RouteProp<StackParamList, 'Payment'>>();
+  const {addTicket} = useTicketStore();
 
   const schedule = useMemo(() => {
     return schedules
@@ -37,11 +39,18 @@ const PaymentScreen = () => {
 
   const handleVerification = useCallback(() => {
     setIsLoading(true);
+    addTicket({
+      id: 'DKM-' + formatDate(new Date(), 'yyyyMMddHHmmss'),
+      date: params.payload.fullDate,
+      movieId: movie!.id,
+      scheduleId: schedule!.id,
+      price: movie?.price ?? 0,
+    });
     setTimeout(() => {
       setIsLoading(false);
       navigate('PaymentSuccess', {payload: params.payload});
     }, 2000);
-  }, [navigate, params.payload]);
+  }, [addTicket, movie, navigate, params.payload, schedule]);
 
   return (
     <BaseLayoutComponent>
