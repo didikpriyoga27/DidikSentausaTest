@@ -9,7 +9,7 @@ import HomeIcon from './shared/assets/icons/HomeIcon';
 import TicketIcon from './shared/assets/icons/TicketIcon';
 import TabBarComponent from './shared/components/TabBarComponent';
 import colors from './shared/utils/colors';
-import DetailTicketScreen from './ticket/screens/DetailTicketScreen';
+import BuyTicketScreen from './ticket/screens/BuyTicketScreen';
 import MyTicketScreen from './ticket/screens/MyTicketScreen';
 import PaymentScreen from './ticket/screens/PaymentScreen';
 import PaymentSuccessScreen from './ticket/screens/PaymentSuccessScreen';
@@ -22,7 +22,7 @@ interface PaymentPayload {
 
 export type StackParamList = {
   MyTicket: undefined;
-  DetailTicket: undefined;
+  BuyTicket: undefined;
   Payment: {
     payload: PaymentPayload;
   };
@@ -38,7 +38,7 @@ const TicketStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="MyTicket" component={MyTicketScreen} />
-      <Stack.Screen name="DetailTicket" component={DetailTicketScreen} />
+      <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
       <Stack.Screen name="Payment" component={PaymentScreen} />
       <Stack.Screen name="PaymentSuccess" component={PaymentSuccessScreen} />
     </Stack.Navigator>

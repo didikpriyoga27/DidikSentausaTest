@@ -20,7 +20,7 @@ import schedules from '../../shared/datas/schedules';
 const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
 const today = new Date();
 
-const DetailTicketScreen = () => {
+const BuyTicketScreen = () => {
   const {navigate} = useNavigation<NavigationProp<StackParamList>>();
 
   const [selectedDateIndex, setSelectedDateIndex] = React.useState<
@@ -208,4 +208,4 @@ const DetailTicketScreen = () => {
   );
 };
 
-export default DetailTicketScreen;
+export default BuyTicketScreen;

@@ -80,7 +80,7 @@ const MyTicketScreen = () => {
         <View className="p-4 w-full">
           <Button
             text="Pesan tiket sekarang"
-            onPress={() => navigate('DetailTicket')}
+            onPress={() => navigate('BuyTicket')}
           />
         </View>
       </View>
